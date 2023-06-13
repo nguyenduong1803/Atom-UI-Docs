@@ -1,5 +1,5 @@
 {
-  "name": "nodejs",
+  "name": "atom_docs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,6 +26,7 @@
     "firebase": "^9.14.0",
     "firebase-admin": "^11.3.0",
     "joi": "^17.7.0",
+    "chalk": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",

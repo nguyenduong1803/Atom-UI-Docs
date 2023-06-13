@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-import Joi from "joi";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
+
 const UserSchema = new Schema(
   {
     email: {
@@ -29,37 +28,19 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
-// UserSchema.pre("save", function (next) {
-//   bcryptPassword(this.password);
-//   console.log("password changed")
-//   next();
-// });
+
 UserSchema.pre("save", function (next) {
   this.password = this.bcryptPassword(this.password);
   next();
 });
 UserSchema.methods = {
-  // compare password
   bcryptPassword(password) {
     if (!password) return "";
     return bcrypt.hashSync(password, 10);
   },
   authenticate(password) {
-    return bcrypt.compareSync(password,this.password)
+    return bcrypt.compareSync(password, this.password);
   },
-  // handle validate user
-  // async validate(data) {
-  //   const rule = Joi.object({
-  //     fullname: Joi.string().min(6).max(225).required(),
-  //     email: Joi.string().min(6).max(225).required(),
-  //     password: Joi.string()
-  //       .pattern(new RegExp("^[a-zA-Z0-9]{6,20}$"))
-  //       .required(),
-  //     isAdmin: Joi.boolean(),
-  //     phone: Joi.number(),
-  //   });
-  //   return await rule.validate(data);
-  // },
 };
 
 export default mongoose.model("users", UserSchema);

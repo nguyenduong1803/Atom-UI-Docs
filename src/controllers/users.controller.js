@@ -1,4 +1,4 @@
-import Auth from "../models/user";
+import Auth from "../database/models/user.model";
 import Joi from "joi";
 const login = async (req, res) => {
   try {
