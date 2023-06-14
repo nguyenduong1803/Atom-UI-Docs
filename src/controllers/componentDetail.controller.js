@@ -1,23 +1,17 @@
 import { STATUS } from "../configs/status";
 import { responseError, responseSuccess } from "../helpers/response";
-import componentRepository from "../repositories/component.repository";
+import componentDetailRepository from "../repositories/componentDetail.repository";
 
 // *************************************** API COMMON ***************************************
 
-// [GET] api/component/:id
-export const findById = async (req, res) => {
+// [GET] api/component-detail
+export const read = async (req, res) => {
   try {
-    const { id } = req.params;
-    const data = await componentRepository.findById(id);
-
-    if(!data){
-      const error = { status:STATUS.NOT_FOUND,message: "Không tìm thấy component"};
-    return responseError(res, error);
-    }
+    const data = await componentDetailRepository.read();
 
     const response = {
       data,
-      message: "Tìm component theo mã id thành công",
+      message: "Lấy danh sách component chi tiết thành công",
     };
 
     return responseSuccess(res, response);
@@ -26,20 +20,42 @@ export const findById = async (req, res) => {
   } 
 };
 
-// [GET] api/component/path/:id
-export const findByPath = async (req, res) => {
+// [GET] api/component-detail/:id
+export const findById = async (req, res) => {
   try {
-    const { path } = req.params;
-    const data = await componentRepository.findByPath(path);
+    const { id } = req.params;
+    const data = await componentDetailRepository.findById(id);
 
     if(!data){
-      const error = {status:STATUS.NOT_FOUND, message: "Không tìm thấy component"};
+      const error = { status:STATUS.NOT_FOUND,message: "Không tìm thấy component"};
     return responseError(res, error);
     }
 
     const response = {
       data,
-      message: "Tìm component theo đường dẫn thành công",
+      message: "Tìm component chi tiết theo mã id thành công",
+    };
+
+    return responseSuccess(res, response);
+  } catch (error) {
+    return responseError(res, error);
+  } 
+};
+
+// [GET] api/component-detail/component-id/:id
+export const findByComponentId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await componentDetailRepository.findByComponentId(id);
+
+    if(!data){
+      const error = {status:STATUS.NOT_FOUND, message: "Không tìm thấy component chi tiết"};
+    return responseError(res, error);
+    }
+
+    const response = {
+      data,
+      message: "Tìm component chi tiết theo đường dẫn thành công",
     };
 
     return responseSuccess(res, response);
@@ -50,15 +66,15 @@ export const findByPath = async (req, res) => {
 
 // *************************************** API ADMIN ***************************************
 
-// [POST] api/admin/component/create
+// [POST] api/admin/component-detail/create
 export const create = async (req, res) => {
   try {
     const body = req.body;
-    const data = await componentRepository.createComponent(body);
+    const data = await componentDetailRepository.createComponent(body);
 
     const response = {
       data,
-      message: "Tạo component thành công",
+      message: "Tạo component chi tiết thành công",
     };
 
     return responseSuccess(res, response);
@@ -67,16 +83,16 @@ export const create = async (req, res) => {
   }
 };
 
-// [PUT] api/admin/component/update/:id
+// [PUT] api/admin/component-detail/update/:id
 export const update = async (req, res) => {
   try {
     const body = req.body;
     const { id } = req.params;
-    const data = await componentRepository.updateComponent(id, body);
+    const data = await componentDetailRepository.updateComponent(id, body);
 
     const response = {
       data,
-      message: "Cập nhật component thành công",
+      message: "Cập nhật component chi tiết thành công",
     };
 
     return responseSuccess(res, response);
@@ -85,15 +101,15 @@ export const update = async (req, res) => {
   }
 };
 
-// [DELETE] api/admin/component/remove/:id
+// [DELETE] api/admin/component-detail/remove/:id
 export const remove = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await componentRepository.deleteComponent(id);
+    const data = await componentDetailRepository.deleteComponent(id);
 
     const response = {
       data,
-      message: "Xóa component thành công",
+      message: "Xóa component chi tiết thành công",
     };
 
     return responseSuccess(res, response);

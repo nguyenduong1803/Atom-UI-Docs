@@ -4,7 +4,7 @@ dotenv.config();
 //require chalk module to give colors to console text
 
 //require database URL from properties file
-const DB_URL = `mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@atlascluster.kowuocj.mongodb.net/`;
+const DB_URL = `mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@atlascluster.kowuocj.mongodb.net/?retryWrites=true&w=majority`;
 
 //export this function and imported by server.js
 export const connectMongoDB = () => {

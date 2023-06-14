@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const ClassList = new Schema(
+const ClassListSchema = new Schema(
   {
     name: {
       type: String,
@@ -28,4 +28,4 @@ const ClassList = new Schema(
   }
 );
 
-export default mongoose.model("classList", ClassList);
+export default mongoose.model("classList", ClassListSchema);
