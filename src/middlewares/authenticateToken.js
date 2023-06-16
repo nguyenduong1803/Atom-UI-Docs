@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import checkGoogle from "./checkGoogle";
+// import checkGoogle from "./checkGoogle";
 const verifyToken = (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
-    const type = req.body.type;
+    // const type = req.body.type;
     if (!authHeader) {
       res.status(400).json({ message: "token is required" });
       return;
@@ -12,10 +12,10 @@ const verifyToken = (req, res, next) => {
     if (token === null || !token) {
       return res.status(400);
     }
-    if (type !== "registed") {
-      checkGoogle(res, token);
-      return;
-    }
+    // if (type !== "registed") {
+    //   checkGoogle(res, token);
+    //   return;
+    // }
     jwt.verify(token, process.env.SECRETKEY, (err, user) => {
       if (err) {
         return res.status(400).json({ message: "token wrong" });

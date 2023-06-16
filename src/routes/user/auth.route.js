@@ -14,6 +14,6 @@ authRoute.get("", getAll);
 authRoute.post("/register", register);
 authRoute.post("/login", checkAuth, login);
 authRoute.post("/google", checkGoogle, login);
-authRoute.post("/verify-token", verifyToken, authorization);
+authRoute.get("/verify-token", verifyToken, authorization);
 
 export default authRoute;

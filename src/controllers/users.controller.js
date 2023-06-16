@@ -34,7 +34,7 @@ const register = async (req, res) => {
 const authorization = () => {
   try {
   } catch (error) {
-    res.status(200).json({ message: "wrong Token", error });
+    res.status(400).json({ message: "wrong Token", error });
   }
 };
 // [GET] all project
