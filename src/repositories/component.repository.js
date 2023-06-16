@@ -3,6 +3,10 @@
 import ComponentModel from "../database/models/component.model";
 
 class ComponentRepository {
+  async read() {
+    return ComponentModel.find({});
+  }
+
   async findById(id) {
     return ComponentModel.findById(id);
   }

@@ -4,5 +4,6 @@ const commonComponentRoute = express.Router();
 
 commonComponentRoute.get("/path/:path", componentController.findByPath);
 commonComponentRoute.get("/:id", componentController.findById);
+commonComponentRoute.get("/", componentController.read);
 
 export default commonComponentRoute;

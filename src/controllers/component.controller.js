@@ -5,6 +5,22 @@ import componentRepository from "../repositories/component.repository";
 // *************************************** API COMMON ***************************************
 
 // [GET] api/component/:id
+export const read = async (req, res) => {
+  try {
+    const data = await componentRepository.read()
+
+    const response = {
+      data,
+      message: "Lấy danh sách component thành công",
+    };
+
+    return responseSuccess(res, response);
+  } catch (error) {
+    return responseError(res, error);
+  } 
+};
+
+// [GET] api/component/:id
 export const findById = async (req, res) => {
   try {
     const { id } = req.params;
