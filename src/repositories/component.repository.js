@@ -3,8 +3,8 @@
 import ComponentModel from "../database/models/component.model";
 
 class ComponentRepository {
-  async read() {
-    return ComponentModel.find({});
+  async read(obj = {}) {
+    return ComponentModel.find(obj);
   }
 
   async findById(id) {
@@ -13,6 +13,12 @@ class ComponentRepository {
 
   async findByPath(path) {
     return ComponentModel.findOne({ path });
+  }
+
+  async findName(search) {
+    return ComponentModel.find({
+      name: { $regex: search, $options: "i" },
+    }).select("name path");
   }
 
   async createComponent(data) {

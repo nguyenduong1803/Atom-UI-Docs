@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { STATUS } from "../configs/status";
 import { responseError, responseSuccess } from "../helpers/response";
 import componentDetailRepository from "../repositories/componentDetail.repository";
@@ -8,7 +9,17 @@ import componentDetailRepository from "../repositories/componentDetail.repositor
 export const read = async (req, res) => {
   try {
     const data = await componentDetailRepository.read();
-
+    const id = req?.query.id;
+    if (id) {
+      const data = await componentDetailRepository.read({
+        component_id: { $in: [mongoose.Types.ObjectId(id)] },
+      });
+      const response = {
+        data,
+        message: "Lấy danh sách component thành công 2",
+      };
+      return responseSuccess(res, response);
+    }
     const response = {
       data,
       message: "Lấy danh sách component chi tiết thành công",
@@ -17,7 +28,7 @@ export const read = async (req, res) => {
     return responseSuccess(res, response);
   } catch (error) {
     return responseError(res, error);
-  } 
+  }
 };
 
 // [GET] api/component-detail/:id
@@ -26,9 +37,12 @@ export const findById = async (req, res) => {
     const { id } = req.params;
     const data = await componentDetailRepository.findById(id);
 
-    if(!data){
-      const error = { status:STATUS.NOT_FOUND,message: "Không tìm thấy component"};
-    return responseError(res, error);
+    if (!data) {
+      const error = {
+        status: STATUS.NOT_FOUND,
+        message: "Không tìm thấy component",
+      };
+      return responseError(res, error);
     }
 
     const response = {
@@ -39,7 +53,7 @@ export const findById = async (req, res) => {
     return responseSuccess(res, response);
   } catch (error) {
     return responseError(res, error);
-  } 
+  }
 };
 
 // [GET] api/component-detail/component-id/:id
@@ -48,9 +62,12 @@ export const findByComponentId = async (req, res) => {
     const { id } = req.params;
     const data = await componentDetailRepository.findByComponentId(id);
 
-    if(!data){
-      const error = {status:STATUS.NOT_FOUND, message: "Không tìm thấy component chi tiết"};
-    return responseError(res, error);
+    if (!data) {
+      const error = {
+        status: STATUS.NOT_FOUND,
+        message: "Không tìm thấy component chi tiết",
+      };
+      return responseError(res, error);
     }
 
     const response = {

@@ -7,12 +7,12 @@ class ComponentDetailRepository {
     return ComponentDetailModel.findById(id);
   }
 
-  async read() {
-    return ComponentDetailModel.find({});
+  async read(obj = {}) {
+    return ComponentDetailModel.find(obj);
   }
 
   async findByComponentId(id) {
-    return ComponentDetailModel.find({ component_id: id});
+    return ComponentDetailModel.find({ component_id: id });
   }
 
   async createComponent(data) {

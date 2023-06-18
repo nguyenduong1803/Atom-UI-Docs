@@ -1,9 +1,9 @@
 import * as componentDetailController from "../../controllers/componentDetail.controller";
 import express from "express";
-const adminComponentRoute = express.Router();
+const adminComponentDetail = express.Router();
 
-adminComponentRoute.post("/create", componentDetailController.create);
-adminComponentRoute.put("/update/:id", componentDetailController.update);
-adminComponentRoute.delete("/remove:id", componentDetailController.remove);
+adminComponentDetail.post("/create", componentDetailController.create);
+adminComponentDetail.put("/update/:id", componentDetailController.update);
+adminComponentDetail.delete("/remove/:id", componentDetailController.remove);
 
-export default adminComponentRoute;
+export default adminComponentDetail;

@@ -11,10 +11,11 @@ const ComponentDetailSchema = new Schema(
       type: String,
       required: true,
     },
-    component_id:{
-        type: mongoose.Types.ObjectId,
-        ref: 'component',
-        autopopulate: { select: '_id' },
+    component_id: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "component",
+      autopopulate: { select: "_id name" },
     },
     description: {
       type: String,

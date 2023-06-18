@@ -1,6 +1,7 @@
 import adminAnswerRoute from "./admin-answer";
 import adminClassListRoute from "./admin-classList";
 import adminComponentRoute from "./admin-component";
+import adminComponentDetail from "./admin-componentDetail";
 import adminQuestionRoute from "./admin-question";
 
 const adminRoutes = {
@@ -9,6 +10,10 @@ const adminRoutes = {
     {
       path: "component",
       route: adminComponentRoute,
+    },
+    {
+      path: "component-detail",
+      route: adminComponentDetail,
     },
     {
       path: "class-list",

@@ -4,20 +4,28 @@ import componentRepository from "../repositories/component.repository";
 
 // *************************************** API COMMON ***************************************
 
-// [GET] api/component/:id
+// [GET] api/component?name=
 export const read = async (req, res) => {
   try {
-    const data = await componentRepository.read()
+    const search = req?.query.name;
+    if (search) {
+      const data = await componentRepository.findName(search);
+      const response = {
+        data,
+        message: "Lấy danh sách component thành công",
+      };
+      return responseSuccess(res, response);
+    }
 
+    const data = await componentRepository.read();
     const response = {
       data,
       message: "Lấy danh sách component thành công",
     };
-
     return responseSuccess(res, response);
   } catch (error) {
     return responseError(res, error);
-  } 
+  }
 };
 
 // [GET] api/component/:id
@@ -26,9 +34,12 @@ export const findById = async (req, res) => {
     const { id } = req.params;
     const data = await componentRepository.findById(id);
 
-    if(!data){
-      const error = { status:STATUS.NOT_FOUND,message: "Không tìm thấy component"};
-    return responseError(res, error);
+    if (!data) {
+      const error = {
+        status: STATUS.NOT_FOUND,
+        message: "Không tìm thấy component",
+      };
+      return responseError(res, error);
     }
 
     const response = {
@@ -39,18 +50,22 @@ export const findById = async (req, res) => {
     return responseSuccess(res, response);
   } catch (error) {
     return responseError(res, error);
-  } 
+  }
 };
 
 // [GET] api/component/path/:id
 export const findByPath = async (req, res) => {
   try {
-    const { path } = req.params;
+    const { path } = req.query;
+    console.log(findByPath);
     const data = await componentRepository.findByPath(path);
 
-    if(!data){
-      const error = {status:STATUS.NOT_FOUND, message: "Không tìm thấy component"};
-    return responseError(res, error);
+    if (!data) {
+      const error = {
+        status: STATUS.NOT_FOUND,
+        message: "Không tìm thấy component",
+      };
+      return responseError(res, error);
     }
 
     const response = {
