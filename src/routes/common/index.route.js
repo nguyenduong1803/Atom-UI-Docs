@@ -2,6 +2,7 @@ import commonAnswerRoute from "./common-answer";
 import commonClassListRoute from "./common-classList";
 import commonComponentRoute from "./common-component";
 import commonComponentDetailRoute from "./common-componentDetail";
+import commonPaymentRoute from "./common-payment";
 import commonQuestionRoute from "./common-question";
 
 const commonRoutes = {
@@ -26,6 +27,10 @@ const commonRoutes = {
     {
       path: "question",
       route: commonQuestionRoute,
+    },
+    {
+      path: "payment",
+      route: commonPaymentRoute,
     },
   ],
 };
