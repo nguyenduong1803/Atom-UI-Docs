@@ -33,7 +33,7 @@ function convertTradingViewSymbol(tvSymbol) {
 export const createTrading = async (req, res) => {
     try {
         const { order_id, symbol: symbolOrigin, order_ratio, price: originPrice } = req.body;
-        if (!order_id || !symbol || !order_ratio) return res.status(400).send('Missing params');
+        if (!order_id || !symbolOrigin || !order_ratio) return res.status(400).send('Missing params');
 
         const symbol = convertTradingViewSymbol(symbolOrigin);
         const SIDE_MAP = {
