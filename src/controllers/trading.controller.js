@@ -26,13 +26,25 @@ async function getPrice(symbol) {
 }
 
 function convertTradingViewSymbol(tvSymbol) {
-  // Loại bỏ mọi phần bắt đầu từ dấu chấm (.)
-  return tvSymbol.split('.')[0];
+    // Loại bỏ mọi phần bắt đầu từ dấu chấm (.)
+    return tvSymbol.split('.')[0];
 }
 
 export const createTrading = async (req, res) => {
     try {
-        const { order_id, symbol, order_ratio, price: originPrice } = req.body;
+
+        let data;
+        if (typeof req.body === 'string') {
+            try {
+                data = JSON.parse(req.body);
+            } catch (e) {
+                return res.status(400).json({ error: "Invalid JSON", raw: req.body });
+            }
+        } else {
+            data = req.body;
+        }
+
+        const { order_id, symbol, order_ratio, price: originPrice } = data;
         // if (!order_id || !symbolOrigin || !order_ratio) return res.status(400).send('Missing params');
 
         // const symbol = convertTradingViewSymbol(symbolOrigin);
@@ -95,7 +107,7 @@ export const createTrading = async (req, res) => {
         res.status(500).json({
             success: false,
             error: error.response ? error.response.data : error.message,
-            originError:error
+            originError: error
         });
     }
 }
