@@ -3,6 +3,7 @@ import commonClassListRoute from "./common-classList";
 import commonComponentRoute from "./common-component";
 import commonComponentDetailRoute from "./common-componentDetail";
 import commonQuestionRoute from "./common-question";
+import commonTradingRoute from "./common-trading";
 
 const commonRoutes = {
   prefix: "/",
@@ -26,6 +27,10 @@ const commonRoutes = {
     {
       path: "question",
       route: commonQuestionRoute,
+    },
+    {
+      path: "webhook",
+      route: commonTradingRoute,
     },
   ],
 };

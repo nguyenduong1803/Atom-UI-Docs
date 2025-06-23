@@ -11,12 +11,11 @@ const PORT = process.env.PORT;
 const CLIENT_URL = process.env.CLIENT_URL;
 
 app.use(cors());
-connectMongoDB();
 morgan("tiny");
 app.use(
   cors({
-    credentials: true,
-    origin: [CLIENT_URL],
+    origin: "*",
+    credentials: false,
   })
 );
 app.use(function (req, res, next) {
