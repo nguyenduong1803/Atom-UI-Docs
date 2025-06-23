@@ -25,11 +25,17 @@ async function getPrice(symbol) {
     return parseFloat(res.data.price);
 }
 
+function convertTradingViewSymbol(tvSymbol) {
+  // Loại bỏ mọi phần bắt đầu từ dấu chấm (.)
+  return tvSymbol.split('.')[0];
+}
+
 export const createTrading = async (req, res) => {
     try {
-        const { order_id, symbol, order_ratio, price: originPrice } = req.body;
+        const { order_id, symbol: symbolOrigin, order_ratio, price: originPrice } = req.body;
         if (!order_id || !symbol || !order_ratio) return res.status(400).send('Missing params');
 
+        const symbol = convertTradingViewSymbol(symbolOrigin);
         const SIDE_MAP = {
             openLong: 'BUY',
             closeLong: 'SELL',
