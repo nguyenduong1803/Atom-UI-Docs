@@ -69,8 +69,9 @@ export const createTrading = async (req, res) => {
         const chatContent =
             `symbol: ${symbol}\n` +
             `strategy: ${order_id}\n` +
-            `price: ${originPrice}\n` +
-            `volumn: ${order_ratio * DEFAULT_PRICE}`
+            `price: ${originPrice}` 
+            // +
+            // `volumn: ${order_ratio * DEFAULT_PRICE}`
 
         await bot.sendMessage(CHAT_ID, chatContent);
         // TODO:
