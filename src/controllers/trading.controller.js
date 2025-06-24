@@ -73,7 +73,11 @@ export const createTrading = async (req, res) => {
             `volumn: ${order_ratio * DEFAULT_PRICE}`
 
         await bot.sendMessage(CHAT_ID, chatContent);
-
+        // TODO:
+        return res.json({
+            success: true,
+            data: "fake to send telegram message"
+        });
         // Lấy giá coin hiện tại
         const price = await getPrice(symbol);
         // Số lượng coin (quantity) = (DEFAULT_PRICE * order_ratio) / price
